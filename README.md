@@ -11,3 +11,5 @@ The scripts are ordered in this way:
 - `modeling.R` (for modeling)
 - `null_model.R` (for the null model approach)
 - `figure.R` (for the figures)
+
+In this repository, there are in addition the `README.md` (this file) and `sessionInfo.md` for more information about R, package and OS versions.
