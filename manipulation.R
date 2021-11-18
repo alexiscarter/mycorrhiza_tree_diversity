@@ -64,7 +64,7 @@ usa_cond2 <- usa_cond %>%
 
 ## Remove plots where (at least part of) the condition was not adequate
 excl.plot <- function(x) {
-  if (nrow(x) > 1 && sum(x$CONDPROP_UNADJ) < 1) {x <- x[-1*(1:nrow(x) ) ,]} # remove that plot altogether
+  if (nrow(x) > 1 && sum(x$CONDPROP_UNADJ) < 1) {x <- x[-1*(1:nrow(x) ) ,]} # remove that plots altogether
   return(x)
 }
 
@@ -77,7 +77,7 @@ usa_cond3 <- usa_cond2 %>%
 ## TREE table ####
 ##
 
-## Select only plots that meet criteria in tree record table
+## Select only plots that meet criteria in the tree table
 usa_tree2 <- usa_tree %>%
   dplyr::semi_join(usa_cond3, by = 'PLT_CN') %>% 
   dplyr::filter(STATUSCD == "1")
@@ -98,7 +98,7 @@ usa_tree3 <- usa_tree2 %>%
 
 ## Calculate basal area per tree
 usa_ba <- usa_tree3 %>%
-  inner_join(sp, by = 'SPCD') %>% # merge with sp
+  inner_join(sp, by = 'SPCD') %>% # merge with mycorrhizal associations table
   dplyr::select(CN, PLT_CN, SPCD, SpeciesName, MycorrhizalType, DIA, TPA_UNADJ) %>%
   filter(!is.na(DIA)) %>%
   filter(TPA_UNADJ == 6.018046) %>%
@@ -191,7 +191,7 @@ usa_df <- merge(usa_ba_am, usa_div, by = 'PLT_CN')
 usa_df <- usa_df %>%
   inner_join(dplyr::select(usa_cond3, PLT_CN, PHYSCLCD), by = 'PLT_CN')
 
-## Create new factor to classify plots into xeric, mesic or hydric sites
+## Create a new factor to classify plots into xeric, mesic or hydric sites
 usa_df$moist <- factor(NA, levels = c('Xeric', 'Mesic', 'Humid'))
 
 ## Sort plots depending on the moisture available for the trees
@@ -255,10 +255,10 @@ usa_map_clim$PPT.sc <- scale(usa_map_clim$PPT)
 usa_map_clim$TMEAN.sc <- scale(usa_map_clim$TMEAN)
 usa_map_clim$SLOPE.sc <- scale(usa_map_clim$SLOPE)
 
-## Note: usa_map_clim object is used to make, exploration figures, maps and models.
+## Note: usa_map_clim object is used to make exploration figures, maps and in models.
 
 ##
-## Extra manipulation before modeling for secondary analyses ####
+## Extra manipulation before modeling for additional analyses ####
 ##
 
 ## To only use tree mycorrhizal types at the species-level
@@ -276,7 +276,7 @@ usa_div <- data.frame(div.q0 = specnumber(usa_pres_mat_thres9),
                       div.raref = rarefy(usa_pres_mat_thres9, 10))
 
 ## To do analyses at the subplot-level
-## Modify the following objects:
+## Modify the three following objects:
 usa_ba <- usa_tree3 %>%
   inner_join(sp, by = 'SPCD') %>% # merge with sp
   dplyr::select(CN, PLT_CN, SUBP, SPCD, SpeciesName, MycorrhizalType, DIA, TPA_UNADJ) %>% # SUBP (subplot) here

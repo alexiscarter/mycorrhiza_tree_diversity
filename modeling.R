@@ -11,7 +11,7 @@ library(brms); options(mc.cores = parallel::detectCores())
 ## Models ####
 ##
 
-#usa_map_clim object obtained from manipulation.R
+# Note: use usa_map_clim object obtained from manipulation.R
 
 ## EcM proportion vs q0
 mod.q0.ecm <- brm(formula = div.q0 | trunc(lb = 1) ~ prop.ECM.sc + I(prop.ECM.sc^2) + (1|ECOREG),
@@ -55,4 +55,4 @@ mod.q2.full <- brm(formula = div.q2 | trunc(lb = 1) ~ (prop.ECM.sc + I(prop.ECM.
 
 ## Notes: 
 ## For AM proportion replace prop.ECM.sc by prop.AM.sc
-## For analyses with suplot-level data, species-level data, rarefy data, different minimum number of individuals modify objects as explained in manipulation.R script in order to obtain specific usa_map_clim object. 
+## For analyses with suplot-level data, species-level data, rarefy data and different minimum number of individuals modify objects as explained in manipulation.R script in order to obtain specific usa_map_clim object. 

@@ -122,7 +122,7 @@ ggplot(data = US) +
 ## Post-modeling ####
 ##
 
-## Extract data
+## Extract data from model output
 marg<-conditional_effects(MODEL.OUTPUT) # replace MODEL.OUTPUT by the actual model output you want to plot
 marg.dat<-marg$prop.ECM.sc # extracts EcM proportion
 

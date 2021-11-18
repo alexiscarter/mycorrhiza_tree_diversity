@@ -15,7 +15,9 @@ library(brms); options(mc.cores = parallel::detectCores())
 ## Data processing ####
 ##
 
-#usa_tree3 and usa_cond3 objects obtained from manipulation.R
+# Note: use usa_tree3 and usa_cond3 objects obtained from manipulation.R
+
+## Tree mycorrhizal associations table
 sp <- read_excel("data_tree_sp_myc_type.xlsx", col_types = "text")
 
 ## Calculate basal area per tree
@@ -180,15 +182,16 @@ Ps <- 2*pnorm(-abs(Zs))
 Zscore <- cbind(Zs, Ps)
 colnames(Zscore) = c('Zscore', 'Pvalue')
 
-tmp.XXX <- cbind(Zscore, rep('XXX', dim(Zscore)[1])) # replace XXX by the number of the ecoregion of interest 
+tmp.XXX <- cbind(Zscore, rep('XXX', dim(Zscore)[1])) # replace XXX by the number of the ecoregion of interest.
 
-## Run the null model for every ecoregion and then bind the tmp.XXX table created for q0. Same approach for q1 and q2
+## Run the null model for every ecoregion and then bind the tmp.XXX table created for q0. Same approach is applied for q1 and q2
 #zscore.q0 <- rbind(tmp.XXX, tmp.XXX, ...)
+
 zscore.q0 <- zscore.q0 %>% 
   as.data.frame() %>% 
   rownames_to_column('PLT_CN') 
 
-## For easier processing, use usa_map_clim (from manipulation.R)
+## For easier processing, combine directly with usa_map_clim (from manipulation.R)
 zscore.clim.q0 <- usa_map_clim %>%
   left_join(zscore.q0, by = "PLT_CN")
 

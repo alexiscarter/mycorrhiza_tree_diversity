@@ -10,7 +10,7 @@ library(data.table)
 ## Tree table ####
 ##
 
-## Select columns (fasten the downloading)
+## Select columns of interest (fasten the downloading)
 col.keep.tree <- c(
   'CN',
   'PLT_CN',
@@ -20,7 +20,7 @@ col.keep.tree <- c(
   'TPA_UNADJ',
   'STATUSCD')
 
-## Define column class
+## Define column classes
 colclass.tree <- c(
   'CN' = "character",
   'PLT_CN' = "character",
@@ -30,10 +30,10 @@ colclass.tree <- c(
   'TPA_UNADJ' =  "numeric",
   'STATUSCD' =  "factor")
 
-## Path to load the data
-path.tree <- "https://apps.fs.usda.gov/fia/datamart/CSV/TREE.csv" # From the website, may take several hours
+## Link to download the data
+path.tree <- "https://apps.fs.usda.gov/fia/datamart/CSV/TREE.csv" # From the website, may be long.
 
-## Import table
+## Import the table
 usa_tree <- fread(path.tree, 
                   header=TRUE, 
                   select=col.keep.tree, 
@@ -44,7 +44,7 @@ usa_tree <- fread(path.tree,
 ## Plot table ####
 ##
 
-## Select columns
+## Select columns of interest
 col.keep.plot <- c(
   'CN',
   'PLOT',
@@ -65,7 +65,7 @@ col.keep.plot <- c(
   'UNITCD',
   'COUNTYCD') 
 
-## Define column class
+## Define column classes
 colclass.plot <- c(
   'CN' = "character",
   'PLOT' = "character",
@@ -86,10 +86,10 @@ colclass.plot <- c(
   'UNITCD' = "character",
   'COUNTYCD' = "character")
 
-## Path to load the data
+## Link to download the data
 path.plot <- "https://apps.fs.usda.gov/fia/datamart/CSV/PLOT.csv"
 
-## Import table
+## Import the table
 usa_plot <- fread(path.plot,
                   header=TRUE, 
                   select=col.keep.plot, 
@@ -100,7 +100,7 @@ usa_plot <- fread(path.plot,
 ## Subplot table ####
 ##
 
-## Select columns
+## Select columns of interest
 col.keep.subplot <- c(
   'CN',
   'SUBP',
@@ -113,7 +113,7 @@ col.keep.subplot <- c(
   'SUBP_STATUS_CD',
   'SUBPCOND')
 
-## Define column class
+## Define column classes
 colclass.subplot <- c(
   'CN' = "character",
   'SUBP' = "character",
@@ -126,10 +126,10 @@ colclass.subplot <- c(
   'SUBP_STATUS_CD' = "character",
   'SUBPCOND' = "character")
 
-## Path to load the data
+## Path to download the data
 path.subplot <- "https://apps.fs.usda.gov/fia/datamart/CSV/SUBPLOT.csv"
 
-## Import table
+## Import the table
 usa_subplot <- fread(path.subplot,
                      header=TRUE, 
                      select=col.keep.subplot, 
@@ -140,7 +140,7 @@ usa_subplot <- fread(path.subplot,
 ## Condition table ####
 ##
 
-## Select columns
+## Select columns of interest
 col.keep.cond <- c(
   'CN',
   'PLT_CN',
@@ -166,7 +166,7 @@ col.keep.cond <- c(
   'TRTCD3',
   'PRESNFCD') 
 
-## Define column class
+## Define column classes
 colclass.cond <- c(
   'CN' = "character",
   'PLT_CN' = "character",
@@ -192,15 +192,15 @@ colclass.cond <- c(
   'TRTCD3' = "character",
   'PRESNFCD' = "character")
 
-## Path to load the data
+## Path to download the data
 path.cond <- "https://apps.fs.usda.gov/fia/datamart/CSV/COND.csv"
 
-## Import table
+## Import the table
 usa_cond <- fread(path.cond,
                   header=TRUE, 
                   select=col.keep.cond, 
                   colClasses = colclass.cond,
                   verbose=TRUE)
 
-## Otherwise, to download all the FIA data: https://apps.fs.usda.gov/fia/datamart/CSV/ENTIRE.zip
-## For example, only for the TREE table: https://apps.fs.usda.gov/fia/datamart/CSV/TREE.zip
+## Another option is to download all the FIA data: https://apps.fs.usda.gov/fia/datamart/CSV/ENTIRE.zip and save it locally
+## To only download the TREE table: https://apps.fs.usda.gov/fia/datamart/CSV/TREE.zip
